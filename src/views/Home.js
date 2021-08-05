@@ -27,7 +27,6 @@ class Home extends Component {
    }
 
    addToCart = (id) => {
-      document.getElementById("dropdown-autoclose-false").click();
       document.getElementById("dropdown-autoclose-false2").click();
       document.getElementById("cartCount").textContent = this.cartCount();
       this.setState({ cartData: [...this.state.cartData, ...this.cartData(id)] });
@@ -142,7 +141,7 @@ class Home extends Component {
             <Navigation cartdata={this.state.cartData} clearCart={this.clearCart} />
 
             <Container>
-               <Row><h5 className="my">Featured</h5></Row>
+               <Row><i>Featured</i></Row>
                <Row>
                   <FeaturedProduct products={this.state.featured} addToCart={this.addToCart} detailPage={this.detailPage} />
                </Row>
