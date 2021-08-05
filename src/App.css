@@ -1,0 +1,38 @@
+
+@media only screen and (min-width:768px){
+  .col10{
+    display: none;
+  }   
+}
+
+@media (max-width:769px){
+  .filterMe, .filterGo {
+   display: none;
+  } 
+  
+  .my {
+    color :red;
+}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+.App-logo {
+ animation: App-logo-spin infinite 20s linear;
+}
+}
+/* Style the buttons */
+.btnn {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Style the active class, and buttons on mouse-over */
+.active, .btnn:hover {
+  background-color: #666;
+  color: white;
+}
+
