@@ -22,7 +22,7 @@ export const Product = (props) => {
                 
                 <Card.Body>
                     <Row>
-                    {/* <Card.ImgOverlay><i>{product.bestseller ?'Bestseller': ''}</i></Card.ImgOverlay> */}
+                    <Card.ImgOverlay><i>{product.bestseller ?'Bestseller': ''}</i></Card.ImgOverlay>
                         <Card.Img  variant="top" style={{width:"400px", height:"200px"}} src={product.image.src ? product.image.src : './logo192.png'} className="img-fluid img-thumbnail d-block mx-auto" width="385px" height="239px" alt={product.image.alt ? product.image.alt : product.name} />
                     </Row>
                     <Row>

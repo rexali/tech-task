@@ -8,6 +8,13 @@ function Filter(props) {
     let price = 0;
     let filteredData=[];
 
+    const handleClose = () => setShow(false);
+
+    const handleShow = () => setShow(true);
+
+    const getUniqueCategory = () => props.getCategory();
+    
+
     const getFetchData = async () => {
 
         let promise = new Promise((resolve, reject) => {
@@ -56,29 +63,20 @@ function Filter(props) {
     const clearFormData = () => {
         let checkboxes = document.getElementsByClassName("myCheck");
         for (let i = 0; i <= checkboxes.length; i++) {
-            checkboxes[i].checked = false;
+            checkboxes[i].nodeValue = '';
         }
         document.getElementById("price").value = 0;
     }
 
-    const priceRangeHandler = ev => {
-        price = ev.target.value;
-    }
+    const priceRangeHandler = ev => price = ev.target.value;
 
-    const getCategoryies = ev => {
-        categories.push(ev.target.value);
-    }
+
+    const getCategoryies = ev => categories.push(ev.target.value);
 
     useEffect(() => {}, []);
 
 
-    const handleClose = () => setShow(false);
-
-    const handleShow = () => setShow(true);
-
-    const getUniqueCategory = () => {
-        return props.getCategory();
-    }
+    
 
     return (
         <div className="d-lg-none">
