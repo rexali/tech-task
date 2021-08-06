@@ -1,32 +1,12 @@
 import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-// import ReactDOM from "react-dom";
 
 function Filter(props) {
     const [show, setShow] = useState(false);
 
     let categories = [];
     let price = 0;
-    let data =[];
     let filteredData=[];
-
-    const getData = () => {
-        let url = "mydata.json";
-        fetch(url, {
-            mode: 'no-cors'
-        }).then(
-            response => {
-                response.json().then(result => {
-                    // setData(result);
-                },
-
-                    error => {
-                        console.warn(error);
-                    }
-
-                )
-            });
-    }
 
     const getFetchData = async () => {
 
@@ -53,12 +33,6 @@ function Filter(props) {
     }
 
 
-    data = getFetchData();
-    filteredData = data.filter((p,i) =>{
-        return categories.contains(p.category) && p.price === price;
-    })
-    
-
 
     const getFormData =(ev)=> {
         ev.preventDefault();
@@ -66,7 +40,15 @@ function Filter(props) {
             categories: categories,
             price: price 
         }
+
+        getFetchData().then((data)=>{
+            filteredData = data.filter((p,i) =>{
+                return categories.includes(p.category) && p.price === price;
+            })
+        });
+
         props.sendFilteredData(filteredData);
+
         handleClose();
         console.log(formObj);
     }
@@ -138,14 +120,6 @@ function Filter(props) {
                      </Form>
 
                 </Modal.Body>
-                {/* <Modal.Footer>
-                    <Button variant="secondary" onClick={clearFormData}>
-                        Clear
-                    </Button>
-                    <Button variant="primary" onClick={getFormData}>
-                        Save
-                    </Button>
-                </Modal.Footer> */}
             </Modal>
         </div>
     );

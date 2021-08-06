@@ -10,8 +10,8 @@ const Navigation = (props) => {
     <Navbar bg="light" variant="light">
       <Container>
         <Navbar.Brand href="/">BEJAMAS_</Navbar.Brand>
-        <Nav className="me-auto">
-          <Dropdown className="d-inline mx-2" autoClose={false} align="end">
+        <Nav>
+        <Dropdown className="d-inline mx-2" autoClose={false} align="end">
             <Dropdown.Toggle variant="light" id="dropdown-autoclose-false2">
               <i className="fa fa-shopping-cart mr-2"></i> <sub><Badge pill bg="secondary" id="cartCount">0</Badge></sub>
             </Dropdown.Toggle>

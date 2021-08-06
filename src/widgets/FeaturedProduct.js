@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-// import {Product} from './Product'; 
 
 
 const FeaturedProduct = (props)=>{
@@ -17,27 +16,36 @@ return (
                <Card.Img variant="top" src={data.image.src ? data.image.src : './logo192.png'} className="img-fluid img-thumbnail d-block  mx-auto" width="385px" height="239px" alt={data.image.alt ? data.image.alt : data.name} /><br/>       
                </Row>
                <Row>
-                  <Col sm={12} md lg={6}>
+                  <Col sm md={12} lg={6}>
                   <Card.Title>About {" "} {data.name ? data.name : 'my name'}</Card.Title>
                   <Card.Text>
                   {data.details.description ? data.details.description : 'Good product'}
                   </Card.Text> 
                   </Col>
 
-                  <Col sm={12} md lg={6}>
+                  <Col sm md={12} lg={6}>
                   <Card.Title>People also buy</Card.Title>
-                  <div className="pull-right">
+                  <Row>
+                  <Col className="text-right">
                   {data.details.recommendations.map((el,i)=>{
-                     return <Card.Img key={i} variant="top" src={el.src ? el.src : './logo192.png'} className="img-fluid img-thumbnail w-25 h-25 m-3 mx-auto" alt={el.alt ? el.alt : ''} />
+                     return <Card.Img key={i} variant="top" style={{width:"70px", height:"70px" }} src={el.src ? el.src : './logo192.png'} className="img-fluid img-thumbnail d-inline-block m-3 mr-auto" alt={el.alt ? el.alt : ''} />
                   })}
-                  </div>
+                  </Col>
+                  </Row>
+
+                  <Row>
+                  <Col className="text-right">
                   <Card.Title>Detail</Card.Title>
                   <Card.Text>
                   Dimension: {" "}{data.details.dimensions.width} {" X "} {data.details.dimensions.height}
                   </Card.Text> 
+
                   <Card.Text>
                   Size: {" "}{data.details.size} {" mb"}
                   </Card.Text> 
+                  </Col>
+                  </Row>
+                  
                   </Col>
                </Row>
 

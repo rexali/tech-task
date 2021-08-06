@@ -19,6 +19,7 @@ class Home extends Component {
       this.state = {
          cartData: [],
          data: [],
+         filterData:[],
          featured: [],
          categories: [],
          pricerange: []
@@ -66,16 +67,16 @@ class Home extends Component {
 
    }
 
-   sendData = (data) => {
+   sendData = (msg) => {
       this.setState({
-         data: data
+         filterData: msg
       });
    }
 
 
    sendFilteredData = (data) => {
       this.setState({
-         data: data
+         filterData: data
       });
    }
 
@@ -119,8 +120,12 @@ class Home extends Component {
                return product.featured === true;
             });
 
-            this.setState({ featured: featuredProduct });
+            let filteredProduct = result.filter((_,i) => {
+               return i < 6;
+            });
             this.setState({ data: result });
+            this.setState({ featured: featuredProduct });
+            this.setState({ filterData: filteredProduct });
          })
    }
 
@@ -137,7 +142,7 @@ class Home extends Component {
       console.log(this.state.cartData);
 
       return (
-         <div>
+         <div className="mb-6" style={{marginBottom:"70px"}}>
             <Navigation cartdata={this.state.cartData} clearCart={this.clearCart} />
 
             <Container>
@@ -217,10 +222,10 @@ class Home extends Component {
                   </Col>
                   <Col>
                      <Row>
-                        <Products products={this.state.data} addToCart={this.addToCart} detailPage={this.detailPage} />
+                        <Products products={this.state.filterData} addToCart={this.addToCart} detailPage={this.detailPage} />
                      </Row>
                      <Row>
-                        <PageNumbering data={this.state.data} sendData={this.sendData} />
+                        <PageNumbering data={this.state.data}  sendData={this.sendData} />
                      </Row>
                   </Col>
                </Row>
