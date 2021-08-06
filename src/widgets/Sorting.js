@@ -4,8 +4,8 @@ import '../styles/sorting.css';
 
 function Sorting(props) {
 
-    const getSortValue = ()=>{
-        let value = document.getElementById("sortProductValue").value;
+    const getSortValue = (ev)=>{
+        let value = ev.target.value;
         sortProducts(value);
 
     }
@@ -86,7 +86,7 @@ function Sorting(props) {
 
     return (
         <div className="filterMe">
-            <select className="m-2" id="sortProduct" onClick={getSortValue}>
+            <select className="m-2" id="sortProduct" onClick={(ev)=>getSortValue(ev)}>
                 <option value="0">SORT</option>
                 <option value="1">ASC</option>
                 <option value="2">DESC</option>

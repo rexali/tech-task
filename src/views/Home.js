@@ -131,10 +131,11 @@ class Home extends Component {
 
    clearFormData = () => {
       let checkboxes = document.getElementsByClassName("myCheck");
+      console.log(checkboxes);
       for (let i = 0; i <= checkboxes.length; i++) {
-         checkboxes[i].checked = false;
+         checkboxes[i].checked = '';
       }
-      document.getElementById("price").value = 0;
+   //    document.getElementById("price").value = 0;
    }
 
    render() {
@@ -211,10 +212,10 @@ class Home extends Component {
                            className="myCheck"
                         />
                         <div className="d-flex justify-content-between">
-                           <Button variant="secondary" onClick={this.clearFormData}>
+                           <Button variant="outline-dark" onClick={this.clearFormData}>
                               Clear
                            </Button>
-                           <Button variant="primary" className="mr-4" onClick={(ev) => this.getFormData(ev)}>
+                           <Button variant="outline-dark" className="mr-4" onClick={(ev) => this.getFormData(ev)}>
                               Save
                            </Button>
                         </div>

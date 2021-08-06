@@ -20,7 +20,7 @@ const Navigation = (props) => {
               <DropdownItems params={props.cartdata} />
               <Dropdown.Item>
                 <Row>
-                  <Button variant="outline-success" size="sm" onClick={props.clearCart}>Clear</Button>
+                  <Button variant="outline-dark" size="sm" onClick={props.clearCart}>Clear</Button>
                 </Row>
               </Dropdown.Item>
             </Dropdown.Menu>

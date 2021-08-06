@@ -9,7 +9,7 @@ return (
          <Card style={{ marginTop: '5px' }} key={index} >
             <Card.Header className="d-flex justify-content-between">
                <Card.Title>{data.name ? data.name : 'my picture'}</Card.Title>
-               <Button variant="secondary" size="sm" onClick={() => addToCart(index)}><small>Add to Cart</small></Button>
+               <Button variant="dark" size="sm" onClick={() => addToCart(index)}><small>Add to Cart</small></Button>
             </Card.Header>
             <Card.Body>
                <Row>
