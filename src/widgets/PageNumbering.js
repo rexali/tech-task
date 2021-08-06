@@ -7,7 +7,7 @@ function Buttons(props) {
     return props.data.map((_, i) => {
         let item;
         if (i % 6 === 0) {
-            item = <button key={i} onClick={(ev) => { props.currentPage(i) }} className="btnn"> {x} </button>;
+            item = <button key={i} className="btnn"> {x} </button>;
             x = x + 1;
         }
 
@@ -17,9 +17,22 @@ function Buttons(props) {
 
 function PageNumbering(props) {
 
+    
+    const filterPrev = (index) => {
+        let newData = props.data.filter((_, i) => {
+            return i>=((index*6)-6) && i < (index * 6);
+        });
+        return newData;
+    }
 
-    const filterPrev = (index) => { }
-    const filterNext = (index) => { }
+    const filterNext = (index) => {
+        let newData = props.data.filter((_, i) => {
+            return i >= (index * 6) && i < ((index*6)+6) ;
+        });
+        return newData;  
+    }
+
+
 
     useEffect(() => {
 
@@ -30,22 +43,20 @@ function PageNumbering(props) {
         var header = document.getElementById("pagination");
         var btns = header.getElementsByClassName("btnn");
         var current = document.getElementsByClassName("active");
-
-
         for (var i = 0; i < btns.length; i++) {
             // eslint-disable-next-line no-loop-func
             btns[i].addEventListener("click", function () {
                 current[0].className = current[0].className.replace(" active", " ");
                 this.className += " active";
-                props.sendFilteredData(filterPrev(btns[i].nodeValue));
-
+                props.sendFilteredData(filterPrev(Number(btns[i].textContent)));
             });
         }
+        // end
 
         // handle previous product page
         prev.addEventListner("click", function () {
-            if ((Number(current[0].textContent) - 1)) {
-                let index = Number(current[0].textContent) - 1;
+            if (Number(current[0].previousElementSibling.textContent)) {
+                let index = Number(current[0].previousElementSibling.textContent);
                 current[0].className = current[0].className.replace(" active", "");
                 current[0].previousElementSibling.className += " active";
                 props.sendFilteredData(filterPrev(index));
@@ -53,12 +64,13 @@ function PageNumbering(props) {
                 prev.disabled = true;
             }
         });
+        // end prev
 
         // handle next product page
         let next = document.getElementById("next");
         next.addEventListner("click", function () {
-            if ((Number(current[0].textContent) + 1)) {
-                let index = Number(current[0].textContent);
+            if (Number(current[0].nextElementSibling.textContent)) {
+                let index = Number(current[0].nextElementSibling.textContent);
                 current[0].className = current[0].className.replace(" active", "");
                 current[0].nextElementSibling.className += " active";
                 props.sendFilteredData(filterNext(index));
@@ -66,6 +78,7 @@ function PageNumbering(props) {
                 next.disabled = true;
             }
         });
+        // end next
 
 
 

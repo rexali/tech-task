@@ -64,7 +64,6 @@ class Home extends Component {
       });
       console.log(category);
       return category;
-
    }
 
    sendData = (msg) => {
@@ -73,15 +72,11 @@ class Home extends Component {
       });
    }
 
-
    sendFilteredData = (data) => {
       this.setState({
          filterData: data
       });
    }
-
-
-
 
    getPriceRange = event => {
       let range = event.target.value;
@@ -89,7 +84,6 @@ class Home extends Component {
          pricerange: [...range.split("-")]
       });
    }
-
 
    getCategoryies = ev => {
       this.setState({
@@ -106,12 +100,10 @@ class Home extends Component {
       this.setState({
          data: [...homeFitered]
       })
-
    }
 
    componentDidMount() {
-
-
+      
       const url = 'mydata.json';
       fetch(url, { mode: 'no-cors' })
          .then((result) => result.json())

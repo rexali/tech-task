@@ -86,7 +86,7 @@ function Sorting(props) {
 
     return (
         <div className="filterMe">
-            <select className="m-2" id="sortProduct" onClick={(ev)=>getSortValue(ev)}>
+            <select className="m-2" id="sortProduct" onSelect={(ev)=>getSortValue(ev)}>
                 <option value="0">SORT</option>
                 <option value="1">ASC</option>
                 <option value="2">DESC</option>
