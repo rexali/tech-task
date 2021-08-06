@@ -4,18 +4,14 @@ import '../styles/sorting.css';
 
 function Sorting(props) {
 
-    const getSortValue = (ev) => {
-        let value = ev.target.value;
-        sortProducts(value);
 
-    }
 
     const ascendingPrice = (params) => {
-
+        alert("hi");
         let fromLowest = params.sort((a, b) => {
             return a.price - b.price
         });
-
+        console.log("Hi   " + fromLowest);
         props.sendData(fromLowest);
     }
 
@@ -56,14 +52,13 @@ function Sorting(props) {
 
     }
 
-    const sortProducts = (key) => {
-        switch (key) {
-            case 0:
+    const getSortValue = (evt) => {
+        let value = evt.target.value;
 
-                break;
+        switch (Number(value)) {
 
             case 1:
-                ascendingPrice(props.data)
+                ascendingPrice(props.data);
                 break;
 
             case 2:
@@ -79,14 +74,16 @@ function Sorting(props) {
                 break;
 
             default:
+
                 break;
         }
+
     }
 
     return (
         <div className="filterMe">
-            <select className="m-2" id="sortProduct" onSelect={(ev) => getSortValue(ev)}>
-                <option value="0">SORT</option>
+            <select className="mr-4 form-control form-control-sm" id="sortProduct" onChange={(evt) => { getSortValue(evt) }}>
+                <option>SORT By</option>
                 <option value="1">ASC</option>
                 <option value="2">DESC</option>
                 <option value="3">A-Z</option>

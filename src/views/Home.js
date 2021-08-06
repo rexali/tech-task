@@ -68,15 +68,11 @@ class Home extends Component {
 
    sendData = (msg) => {
       this.setState({
-         filterData: msg
+         filterData: [...msg]
       });
+
    }
 
-   sendFilteredData = (data) => {
-      this.setState({
-         filterData: data
-      });
-   }
 
    getPriceRange = event => {
       let range = event.target.value;
@@ -87,13 +83,13 @@ class Home extends Component {
 
    getCategoryies = ev => {
       this.setState({
-         categories: [this.state.categories, ...ev.target.value]
+         categories: [...this.state.categories, ev.target.value]
       });
    }
 
 
-   getFormData = event => {
-      event.preventDefault();
+   getFormData = (evt) => {
+      evt.preventDefault();
       let homeFitered = this.state.data.filter((p, i) => {
          return this.state.categories.contains(p.category) && this.state.pricerange.contains(p.price);
       })
@@ -103,7 +99,7 @@ class Home extends Component {
    }
 
    componentDidMount() {
-      
+
       const url = 'mydata.json';
       fetch(url, { mode: 'no-cors' })
          .then((result) => result.json())
@@ -124,15 +120,13 @@ class Home extends Component {
    clearFormData = () => {
       let checkboxes = document.getElementsByClassName("myCheck");
       console.log(checkboxes);
-      for (let i = 0; i <= checkboxes.length; i++) {
-         checkboxes[i].checked = '';
+      for (var i = 0; i <= checkboxes.length; i++) {
+         checkboxes[i].checked = false;
       }
-   //    document.getElementById("price").value = 0;
+      document.getElementById("price").value = 0;
    }
 
    render() {
-
-      console.log(this.state.cartData);
 
       return (
          <div className="mb-6" style={{marginBottom:"70px"}}>
@@ -143,7 +137,7 @@ class Home extends Component {
                <Row>
                   <FeaturedProduct products={this.state.featured} addToCart={this.addToCart} detailPage={this.detailPage} />
                </Row>
-               <Row><div className="d-flex justify-content-between"><h6 className="m-2"><small>Photography/</small><small className="text-muted">Premium Photos</small></h6> <Sorting data={this.state.data} /><Filter data={this.state.data} getCategory={this.getCategory} className="d-none" /></div></Row>
+               <Row><div className="d-flex justify-content-between"><h6 className="m-2"><small>Photography/</small><small className="text-muted">Premium Photos</small></h6> <Sorting data={this.state.filterData} sendData={this.sendData}/><Filter data={this.state.data} getCategory={this.getCategory} /></div></Row>
                <Row>
                   <Col md={3} className="filterGo">
 
