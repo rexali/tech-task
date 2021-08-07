@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+// import Pagination from 'react-js-pagination';
 
 
 function Buttons(props) {
@@ -91,7 +92,7 @@ function PageNumbering(props) {
         <div className="d-flex  justify-content-center mt-3" id="pagination">
             <button id="prev" className="btn btn-outline-dark">&lt;</button>
             <Buttons data={props.data} />
-            <button id="next" className="btn btn-outline-dark">&gt;</button>
+            <button id="next" className="btn btn-outline-dark">&gt;</button>    
         </div>
     );
 }

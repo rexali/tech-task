@@ -4,10 +4,11 @@ import Row from "react-bootstrap/Row";
 import FeaturedProduct from '../widgets/FeaturedProduct';
 import Products from "../widgets/Product";
 import Navigation from "../widgets/Navigation";
-import PageNumbering from "../widgets/PageNumbering";
+// import PageNumbering from "../widgets/PageNumbering";
 import Filter from "../widgets/Filter";
 import Sorting from "../widgets/Sorting";
 import { Button, Col, Form } from "react-bootstrap";
+import Pagination from "react-js-pagination"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/sorting.css';
@@ -19,12 +20,28 @@ class Home extends Component {
       this.state = {
          cartData: [],
          data: [],
-         filterData:[],
+         filterData: [],
          featured: [],
          categories: [],
-         pricerange: []
+         pricerange: [],
+         activePage:1
       };
 
+   }
+
+   filterPrev = (index) => {
+      let newData = this.state.data.filter((_, i) => {
+          return i >= ((index * 6) - 6) && i < (index * 6);
+      });
+      return newData;
+  }
+
+   handlePageChange(pageNumber){
+      console.log(`active page is ${pageNumber}`);
+      this.setState({
+         activePage:pageNumber,
+         filterData:[...this.filterPrev(pageNumber)]
+      })
    }
 
    addToCart = (id) => {
@@ -76,26 +93,44 @@ class Home extends Component {
 
    getPriceRange = event => {
       let range = event.target.value;
+      console.log((range.split("-").map(n => parseInt(n))));
       this.setState({
-         pricerange: [...range.split("-")]
+         pricerange: [...range.split("-").map(n => parseInt(n))]
       });
+      console.log(this.state.pricerange);
    }
 
    getCategoryies = ev => {
       this.setState({
-         categories: [...this.state.categories, ev.target.value]
+         categories: [...this.state.categories, ev.target.value],
+         checked:true
       });
    }
 
 
    getFormData = (evt) => {
       evt.preventDefault();
-      let homeFitered = this.state.data.filter((p, i) => {
-         return this.state.categories.contains(p.category) && this.state.pricerange.contains(p.price);
+      let homeFiltered = this.state.data.filter((p, i) => {
+         return this.state.categories.includes(p.category) && this.state.pricerange.includes(p.price);
       })
+      console.log(homeFiltered);
       this.setState({
-         data: [...homeFitered]
+         filterData: [...homeFiltered]
       })
+   }
+
+   clearFormData = () => {
+      let cat = document.getElementsByName("category");
+      cat.forEach((e)=>{
+        e.checked=false;
+      });
+
+      let pr = document.getElementsByName("pricerange");
+      pr.forEach((e)=>{
+        e.checked=false;
+      });
+
+
    }
 
    componentDidMount() {
@@ -108,7 +143,7 @@ class Home extends Component {
                return product.featured === true;
             });
 
-            let filteredProduct = result.filter((_,i) => {
+            let filteredProduct = result.filter((_, i) => {
                return i < 6;
             });
             this.setState({ data: result });
@@ -117,19 +152,12 @@ class Home extends Component {
          })
    }
 
-   clearFormData = () => {
-      let checkboxes = document.getElementsByClassName("myCheck");
-      console.log(checkboxes);
-      for (var i = 0; i <= checkboxes.length; i++) {
-         checkboxes[i].checked = false;
-      }
-      document.getElementById("price").value = 0;
-   }
+   
 
    render() {
 
       return (
-         <div className="mb-6" style={{marginBottom:"70px"}}>
+         <div className="mb-6" style={{ marginBottom: "70px" }}>
             <Navigation cartdata={this.state.cartData} clearCart={this.clearCart} />
 
             <Container>
@@ -137,7 +165,7 @@ class Home extends Component {
                <Row>
                   <FeaturedProduct products={this.state.featured} addToCart={this.addToCart} detailPage={this.detailPage} />
                </Row>
-               <Row><div className="d-flex justify-content-between"><h6 className="m-2"><small>Photography/</small><small className="text-muted">Premium Photos</small></h6> <Sorting data={this.state.filterData} sendData={this.sendData}/><Filter data={this.state.data} getCategory={this.getCategory} /></div></Row>
+               <Row><div className="d-flex justify-content-between"><h6 className="m-2"><small>Photography/</small><small className="text-muted">Premium Photos</small></h6> <Sorting data={this.state.filterData} sendData={this.sendData} /><Filter data={this.state.data} getCategory={this.getCategory} getFormData={this.getFormData} getCategories={this.getCategoryies} clearFormData={this.clearFormData} getPriceRange={this.getPriceRange}  /></div></Row>
                <Row>
                   <Col md={3} className="filterGo">
 
@@ -146,8 +174,9 @@ class Home extends Component {
                         {Array.from(new Set([...this.getCategory()])).map((e, i) => (
                            <div key={i} className="mb-3">
                               <Form.Check onChange={(ev) => this.getCategoryies(ev)}
+                                 
                                  label={e}
-                                 name={e}
+                                 name="category"
                                  type="checkbox"
                                  value={e}
                                  id={`checkbox-${i}`}
@@ -169,6 +198,7 @@ class Home extends Component {
                         />
 
                         <Form.Check
+                           
                            label="$20-$100"
                            name="pricerange"
                            type="radio"
@@ -179,6 +209,7 @@ class Home extends Component {
                         />
 
                         <Form.Check
+                           
                            label="$100-$200"
                            name="pricerange"
                            type="radio"
@@ -189,6 +220,7 @@ class Home extends Component {
                         />
 
                         <Form.Check
+                           
                            label="More than $200"
                            name="pricerange"
                            type="radio"
@@ -212,7 +244,18 @@ class Home extends Component {
                         <Products products={this.state.filterData} addToCart={this.addToCart} detailPage={this.detailPage} />
                      </Row>
                      <Row>
-                        <PageNumbering data={this.state.data}  sendData={this.sendData} />
+                        {/* <PageNumbering data={this.state.data} sendData={this.sendData} handlePageChange={this.handlePageChange} /> */}
+                        <div className="d-flex  justify-content-center mt-3">
+                           <Pagination 
+                           activePage={this.state.activePage} 
+                           itemsCountPerPage={6}
+                           totalItemsCount={this.state.data.length}
+                           pageRangeDisplayed={10}
+                           itemClass="page-item"
+                           linkClass="page-link"
+                           onChange={this.handlePageChange.bind(this)}
+                           />
+                        </div>
                      </Row>
                   </Col>
                </Row>

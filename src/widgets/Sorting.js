@@ -82,8 +82,8 @@ function Sorting(props) {
 
     return (
         <div className="filterMe">
-            <select className="mr-4 form-control form-control-sm" id="sortProduct" onChange={(evt) => { getSortValue(evt) }}>
-                <option>SORT By</option>
+            <select className="mt-2 mr-4 form-control form-control-sm" id="sortProduct" onChange={(evt) => { getSortValue(evt) }}>
+                <option>Sort by</option>
                 <option value="1">ASC</option>
                 <option value="2">DESC</option>
                 <option value="3">A-Z</option>
