@@ -4,14 +4,13 @@ import Row from "react-bootstrap/Row";
 import FeaturedProduct from '../widgets/FeaturedProduct';
 import Products from "../widgets/Product";
 import Navigation from "../widgets/Navigation";
-// import PageNumbering from "../widgets/PageNumbering";
 import Filter from "../widgets/Filter";
 import Sorting from "../widgets/Sorting";
 import { Button, Col, Form } from "react-bootstrap";
 import Pagination from "react-js-pagination"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/sorting.css';
+import '../App.css';
 
 class Home extends Component {
 
@@ -24,23 +23,34 @@ class Home extends Component {
          featured: [],
          categories: [],
          pricerange: [],
-         activePage:1
+         activePage: 1
       };
 
    }
 
+    over(x){
+        console.log(x);
+        alert("Hi");
+      //   x.target.parent.nextSibling.firstChide.style.display="block";
+      }
+   
+   out(x){
+      //  x.target.style.display=" ";
+   }
+
+
    filterPrev = (index) => {
       let newData = this.state.data.filter((_, i) => {
-          return i >= ((index * 6) - 6) && i < (index * 6);
+         return i >= ((index * 6) - 6) && i < (index * 6);
       });
       return newData;
-  }
+   }
 
-   handlePageChange(pageNumber){
+   handlePageChange(pageNumber) {
       console.log(`active page is ${pageNumber}`);
       this.setState({
-         activePage:pageNumber,
-         filterData:[...this.filterPrev(pageNumber)]
+         activePage: pageNumber,
+         filterData: [...this.filterPrev(pageNumber)]
       })
    }
 
@@ -91,21 +101,32 @@ class Home extends Component {
    }
 
 
+   range = (start, end)=>{
+      let rangeArray = [];
+      for (let i=start; i< end; i++){
+          rangeArray.push(i);
+      }
+      return rangeArray;
+   }
+
+
    getPriceRange = event => {
-      let range = event.target.value;
-      console.log((range.split("-").map(n => parseInt(n))));
+      let rangeString = event.target.value;
+      let rangeNumber = rangeString.split("-").map(n => parseInt(n));
       this.setState({
-         pricerange: [...range.split("-").map(n => parseInt(n))]
+         pricerange: [...this.range(rangeNumber[0], rangeNumber[1])]
       });
-      console.log(this.state.pricerange);
+      console.log(this.range(rangeNumber[0], rangeNumber[1]));
    }
 
    getCategoryies = ev => {
       this.setState({
          categories: [...this.state.categories, ev.target.value],
-         checked:true
+         checked: true
       });
    }
+
+   
 
 
    getFormData = (evt) => {
@@ -121,13 +142,13 @@ class Home extends Component {
 
    clearFormData = () => {
       let cat = document.getElementsByName("category");
-      cat.forEach((e)=>{
-        e.checked=false;
+      cat.forEach((e) => {
+         e.checked = false;
       });
 
       let pr = document.getElementsByName("pricerange");
-      pr.forEach((e)=>{
-        e.checked=false;
+      pr.forEach((e) => {
+         e.checked = false;
       });
 
 
@@ -152,7 +173,7 @@ class Home extends Component {
          })
    }
 
-   
+
 
    render() {
 
@@ -161,20 +182,19 @@ class Home extends Component {
             <Navigation cartdata={this.state.cartData} clearCart={this.clearCart} />
 
             <Container>
-               <Row><i>Featured</i></Row>
                <Row>
                   <FeaturedProduct products={this.state.featured} addToCart={this.addToCart} detailPage={this.detailPage} />
                </Row>
-               <Row><div className="d-flex justify-content-between"><h6 className="m-2"><small>Photography/</small><small className="text-muted">Premium Photos</small></h6> <Sorting data={this.state.filterData} sendData={this.sendData} /><Filter data={this.state.data} getCategory={this.getCategory} getFormData={this.getFormData} getCategories={this.getCategoryies} clearFormData={this.clearFormData} getPriceRange={this.getPriceRange}  /></div></Row>
+               <Row><div className="d-flex justify-content-between"><h5 className="m-2"><small>Photography /</small><small className="text-muted"> Premium Photos</small></h5> <Sorting data={this.state.filterData} sendData={this.sendData} /><Filter data={this.state.data} getCategory={this.getCategory} getFormData={this.getFormData} getCategories={this.getCategoryies} clearFormData={this.clearFormData} getPriceRange={this.getPriceRange} className="filterGo" /></div></Row>
                <Row>
                   <Col md={3} className="filterGo">
 
                      <Form onSubmit={this.getFormData}>
-                        <Form.Label>Filter by categories</Form.Label>
+
+                        <Form.Label>Category</Form.Label>
                         {Array.from(new Set([...this.getCategory()])).map((e, i) => (
                            <div key={i} className="mb-3">
                               <Form.Check onChange={(ev) => this.getCategoryies(ev)}
-                                 
                                  label={e}
                                  name="category"
                                  type="checkbox"
@@ -182,11 +202,12 @@ class Home extends Component {
                                  id={`checkbox-${i}`}
                                  className="myCheck"
                               />
-                              <br />
                            </div>
                         ))
                         }
+                        <hr/>
                         <Form.Label>Price range</Form.Label>
+
                         <Form.Check
                            label="Lower than $20"
                            name="pricerange"
@@ -198,7 +219,6 @@ class Home extends Component {
                         />
 
                         <Form.Check
-                           
                            label="$20-$100"
                            name="pricerange"
                            type="radio"
@@ -209,7 +229,6 @@ class Home extends Component {
                         />
 
                         <Form.Check
-                           
                            label="$100-$200"
                            name="pricerange"
                            type="radio"
@@ -220,11 +239,10 @@ class Home extends Component {
                         />
 
                         <Form.Check
-                           
                            label="More than $200"
                            name="pricerange"
                            type="radio"
-                           value="$200-∞"
+                           value="200-1000000"
                            id={`radio-price4`}
                            onChange={(ev) => this.getPriceRange(ev)}
                            className="myCheck"
@@ -241,19 +259,18 @@ class Home extends Component {
                   </Col>
                   <Col>
                      <Row>
-                        <Products products={this.state.filterData} addToCart={this.addToCart} detailPage={this.detailPage} />
+                        <Products products={this.state.filterData} addToCart={this.addToCart} detailPage={this.detailPage} over={this.over} out={this.out} />
                      </Row>
                      <Row>
-                        {/* <PageNumbering data={this.state.data} sendData={this.sendData} handlePageChange={this.handlePageChange} /> */}
                         <div className="d-flex  justify-content-center mt-3">
-                           <Pagination 
-                           activePage={this.state.activePage} 
-                           itemsCountPerPage={6}
-                           totalItemsCount={this.state.data.length}
-                           pageRangeDisplayed={10}
-                           itemClass="page-item"
-                           linkClass="page-link"
-                           onChange={this.handlePageChange.bind(this)}
+                           <Pagination
+                              activePage={this.state.activePage}
+                              itemsCountPerPage={6}
+                              totalItemsCount={this.state.data.length}
+                              pageRangeDisplayed={3}
+                              itemClass="page-item"
+                              linkClass="page-link"
+                              onChange={this.handlePageChange.bind(this)}
                            />
                         </div>
                      </Row>

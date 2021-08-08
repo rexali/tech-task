@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/sorting.css';
+import '../App.css';
 
 
 function Sorting(props) {
@@ -7,11 +7,9 @@ function Sorting(props) {
 
 
     const ascendingPrice = (params) => {
-        alert("hi");
         let fromLowest = params.sort((a, b) => {
             return a.price - b.price
         });
-        console.log("Hi   " + fromLowest);
         props.sendData(fromLowest);
     }
 
@@ -81,9 +79,9 @@ function Sorting(props) {
     }
 
     return (
-        <div className="filterMe">
-            <select className="mt-2 mr-4 form-control form-control-sm" id="sortProduct" onChange={(evt) => { getSortValue(evt) }}>
-                <option>Sort by</option>
+        <div className="d-flex justify-content-between" id="go">
+           <select className="mt-2 ml-2 mr-4 form-control" id="sortProduct" onChange={(evt) => { getSortValue(evt) }}>
+                <option> Sort By Price</option>
                 <option value="1">ASC</option>
                 <option value="2">DESC</option>
                 <option value="3">A-Z</option>

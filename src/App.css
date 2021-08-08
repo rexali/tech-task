@@ -1,25 +1,56 @@
-
-@media only screen and (min-width:768px){
-  .col10{
-    display: none;
-  }   
+#dropdown-autoclose-false2::after{
+  content: none;
+  /* display: none; */
 }
 
-@media (max-width:769px){
+@media (max-width:768px ){
+
   .filterMe, .filterGo {
    display: none;
-  } 
+  }
+
+  #go, #addTo{
+    display:none;
+  }
+
+  .myimage{
+    max-width:385px;
+    height:239px;
+  }
+
+  #myovelay{
+    margin-top: 235px;
+  }
+
   
-  .my {
-    color :red;
-}
+
+  #featured{
+    margin-top: 235px;
+    margin-right: 100px;  
+  }
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-.App-logo {
- animation: App-logo-spin infinite 20s linear;
+@media only screen and (min-width:769px){
+  #featured{
+    margin-top: 475px;
+    margin-right: 400px;
+   
+  }
+
 }
+
+@media only screen and (min-width:1025px){
+  #featured{
+    margin-top: 650px;
+    margin-right: 400px;
+   
+  }
+
 }
+
+
+
 /* Style the buttons */
 .btnn {
   border: none;
