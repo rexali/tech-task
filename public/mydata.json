@@ -2,7 +2,7 @@
     {
         "name": "Red Bench",
         "category": "people",
-        "price": 3.89,
+        "price": 10,
         "currency": "USD",
         "image": {
             "src": "pexels/pexel1.jpg",
@@ -14,8 +14,8 @@
     },
     {
         "name": "Egg Balloon",
-        "category": "food",
-        "price": 93.89,
+        "category": "people",
+        "price": 15,
         "currency": "USD",
         "image": {
             "src": "pexels/pexel2.jpg",
@@ -28,7 +28,7 @@
     {
         "name": "Man",
         "category": "people",
-        "price": 100,
+        "price": 17,
         "currency": "USD",
         "image": {
             "src": "pexels/pexel3.jpg",
@@ -40,8 +40,8 @@
     },
     {
         "name": "Architecture",
-        "category": "landmarks",
-        "price": 101,
+        "category": "people",
+        "price": 18,
         "currency": "USD",
         "dimmentions": {
             "width": 1020,
@@ -58,7 +58,7 @@
     {
         "name": "Red Bench",
         "category": "people",
-        "price": 3.89,
+        "price": 30,
         "currency": "USD",
         "image": {
             "src": "pexels/pexel5.jpg",
@@ -71,7 +71,7 @@
     {
         "name": "Egg Balloon",
         "category": "food",
-        "price": 93.89,
+        "price": 40.3,
         "currency": "USD",
         "image": {
             "src": "pexels/pexel6.jpg",
@@ -226,7 +226,7 @@
     {
         "name": "Red Bench",
         "category": "people",
-        "price": 3.89,
+        "price": 200.89,
         "currency": "USD",
         "image": {
             "src": "pexels/pexel17.jpg",
@@ -239,7 +239,7 @@
     {
         "name": "Egg Balloon",
         "category": "food",
-        "price": 93.89,
+        "price": 300.89,
         "currency": "USD",
         "image": {
             "src": "pexels/pexel18.jpg",
@@ -311,7 +311,7 @@
         "price": 100,
         "currency": "USD",
         "image": {
-            "src": "pexels/pexe23.jpg",
+            "src": "pexels/pexel23.jpg",
             "alt": ""
         },
         "bestseller": false,

@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+// import '../App.css';
 
 
 function Sorting(props) {
@@ -79,9 +79,10 @@ function Sorting(props) {
     }
 
     return (
-        <div className="d-flex justify-content-between" id="go">
-           <select className="mt-2 ml-2 mr-4 form-control" id="sortProduct" onChange={(evt) => { getSortValue(evt) }}>
-                <option> Sort By Price</option>
+        <div className="d-flex justify-content-between d-none d-lg-block">
+           
+           <i className="fa fa-arrow-up d-inline-block" style={{fontSize:"11px"}}></i><i className="fa fa-arrow-down d-inline-block" style={{fontSize:"11px"}}></i> <i>Sort By</i><select className="mt-2 ml-3 mr-4 d-inline-block" style={{borderRadius:"6px", borderStyle:"none"}} id="sortProduct" onChange={(evt) => { getSortValue(evt) }}>
+                <option>Price</option>
                 <option value="1">ASC</option>
                 <option value="2">DESC</option>
                 <option value="3">A-Z</option>

@@ -8,7 +8,7 @@ import DropdownItems from "./DropDown";
 const Navigation = (props) => {
 
   return (
-    <Navbar bg="white" variant="light">
+    <Navbar bg="white" variant="light" fixed="top">
       <Container>
         <Navbar.Brand href="/">BEJAMAS_</Navbar.Brand>
         <Nav>
@@ -17,8 +17,8 @@ const Navigation = (props) => {
             <i className="fa fa-shopping-cart mr-2"><sub><Badge pill bg="light" style={{fontSize:"10px", color:"black"}}  id="cartCount">0</Badge></sub></i>
             </Dropdown.Toggle>
 
-            <Dropdown.Menu >
-              <DropdownItems params={props.cartdata} />
+            <Dropdown.Menu style={{width:"250px"}} >
+              <DropdownItems params={props.cartdata} clearCart={props.clearCart}/>
               <Dropdown.Item>
                 <Row>
                   <Button variant="outline-dark" size="sm" onClick={props.clearCart}>CLEAR</Button>

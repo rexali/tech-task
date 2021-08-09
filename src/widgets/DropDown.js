@@ -14,17 +14,15 @@ export function DropDown(props) {
 }
 
  function DropdownItems(props) {
-   // const { params, save} = props;
-   let DropdownItem = props.params.map((item, index) => {
+   return props.params.map((item, index) => {
       return (
          <Dropdown.Item key={index}>
             <Container>
-               <div className="d-flex justify-content-between"><span className="text-break w-50">{item.name}<span><br/>{item.price}</span></span><img className="img-fluid w-25 h-25" src={item.image.src?item.image.src:'./logo192.png'} alt={item.image.alt} /></div> 
+               <div className="d-flex justify-content-between"><span className="text-break w-50">{item.name}<span><br/>{item.price}</span></span><img className="img-fluid w-25 h-25" src={item.image.src?item.image.src:''} alt={item.image.alt} /></div> 
             </Container>
          </Dropdown.Item>
       );
    })
-   return DropdownItem;
 }
 
 export default DropdownItems;

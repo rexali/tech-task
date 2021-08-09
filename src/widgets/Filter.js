@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+// import '../App.css';
 
 function Filter(props) {
     const [show, setShow] = useState(false);
