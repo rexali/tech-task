@@ -18,6 +18,7 @@ export function DropDown(props) {
       return (
          <Dropdown.Item key={index}>
             <Container>
+               <button type="button" class="btn-close pull-right" aria-label="Close" onClick={props.clearCart}></button><br/><br/>
                <div className="d-flex justify-content-between"><span className="text-break w-50">{item.name}<span><br/>{item.price}</span></span><img className="img-fluid w-25 h-25" src={item.image.src?item.image.src:''} alt={item.image.alt} /></div> 
             </Container>
          </Dropdown.Item>
